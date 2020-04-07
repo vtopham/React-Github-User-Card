@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import FollowersCard from "./FollowersCard"
 
 //style the card that holds user data
 const CardHolder = styled.div`
@@ -7,15 +8,13 @@ const CardHolder = styled.div`
     flex-direction: column;
     margin: 0 auto;
     width: 50%;
+    align-items: center;
 
-    h1 {
-        align-self: center;
-    }
+   img {
+       width: 50%;
+   }
 
-    img {
-        width: 50%;
-        align-self: center;
-    }
+
 
 
 `
@@ -24,15 +23,21 @@ const CardHolder = styled.div`
 
 const Card = (props) => {
 
-    const {userName, apiData} = props
-    console.log(apiData.avatarURL)
+    const {userName, apiData, followers} = props
 
     return(
         <CardHolder>
             <h1>{apiData.name}</h1>
             
             <img src = {apiData.avatarURL} alt = "the user's avatar"/>
-            
+            <p>{apiData.bio}</p>
+            <div className = "followers-card">
+                <h3>Followers ({apiData.numOfFollowers})</h3>
+                {followers.map((follower) => {
+                    return <FollowersCard key = {follower.id} follower = {follower}/>
+                })}
+            </div>
+                
         </CardHolder>
     )
 }
