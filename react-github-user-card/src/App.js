@@ -34,23 +34,27 @@ class App extends React.Component {
         bio: response.data.bio,
         numOfFollowers: response.data.followers
       }
-    }) //end setState
+    })
 
-    // console.log(response.data.avatar_url)
-    }
-    ) //end .then
+    }) //end .then
+    .catch(
+      console.log("user request failed")
+    )
+
     axios.get(`https://api.github.com/users/vtopham/followers`)
     .then(response => {
       console.log(response.data)
       this.setState({followers: response.data})
     }) //end .then
+    .catch(
+      console.log("followers request failed")
+    )
   } //end componentDidMount
   
 
   render(){
     return(
       <>
-      <h1>Hello!</h1>
       <Card 
         // userName = {this.state.userName}
         apiData = {this.state.apiData}
